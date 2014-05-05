@@ -67,8 +67,8 @@ function Config(extend) {
 exports.development = new Config({
   APP_NAME: 'node-skeleton',
   DEBUG: true,
-  PORT: 3001,
-  DB_URI: 'mongodb://localhost/skeleton_dev'
+  PORT: 80,
+  DB_URI: 'mongodb://localhost/wechat'
 });
 
 /**
@@ -96,7 +96,7 @@ exports.production = new Config({
   APP_NAME: 'node-skeleton',
   DEBUG: false,
   PORT: 80,
-  DB_URI: 'mongodb://localhost/skeleton'
+  DB_URI: 'mongodb://localhost/wechat'
 });
 
 exports.dbinfo = {
