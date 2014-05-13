@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>车险报案</title>
+
+<style type="text/css">
+@import url("./plugins/bootstrap/css/bootstrap.css");
+@import url("./plugins/custom/mobiscroll.custom-2.6.2.min.css");
+</style>
+<script type="text/javascript" src="./js/lib/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="./plugins/custom/mobiscroll.custom-2.6.2.min.js"></script>
+
+<script>
+var cityList=[];
+
+
+cityList.push({code:'021',name:'上海',carcard:'沪'});
+
+cityList.push({code:'0571',name:'杭州',carcard:'浙A'});
+cityList.push({code:'0574',name:'宁波',carcard:'浙B'});
+cityList.push({code:'0577',name:'温州',carcard:'浙C'});
+cityList.push({code:'0575',name:'绍兴',carcard:'浙D'});
+cityList.push({code:'0572',name:'湖州',carcard:'浙E'});
+cityList.push({code:'0573',name:'嘉兴',carcard:'浙F'});
+cityList.push({code:'0579',name:'金华',carcard:'浙G'});
+cityList.push({code:'0570',name:'衢州',carcard:'浙H'});
+cityList.push({code:'0580',name:'舟山',carcard:'浙I'});
+cityList.push({code:'0576',name:'台州',carcard:'浙J'});
+cityList.push({code:'0578',name:'丽水',carcard:'浙K'});
+$(function () {  
+                $("select[name='province']").change(function(){
+                        var code=$(this).find("option:selected").attr("code");
+                        $("select[name='city'] option:not(:first)").remove();
+                        for(var i=0;i<cityList.length;i++){
+                        if(cityList[i].code.substr(0,2)==code){
+                        $("select[name='city']").append("<option value='"+cityList[i].name+"' card='"+cityList[i].carcard+"'>"+cityList[i].name+"</option>");
+                        }
+                        }
+                        });
+                $("select[name='city']").change(function(){
+                        var c=$(this).find("option:selected").attr("card");
+                        $("#thecar").val(c);
+                        });
+                });
+</script>
+
+<script type="text/javascript">
+
+$(function(){
+                var d=new Date();
+                var year= d.getFullYear();
+                var month=d.getMonth();
+                var day=d.getDay();
+                var opt = {};  
+                opt.datetime = { preset : 'datetime',minDate: new Date(year-1,month,1,0,0), maxDate: new Date(),stepMinute: 5  ,height: 30, showLabel: 1};
+                $('#thetime').val('').scroller('destroy').scroller($.extend(opt['datetime'],
+                                { theme: 'android', mode:'scroller', display: 'bottom', lang: 'zh',dateFormat:'yyyy-mm-dd',dateOrder:'yyyymmdd' }));
+
+                $('#thetime').click(function(){
+                        $('#thetime').mobiscroll('show'); 
+                        return false;
+                        }); 
+                });
+</script>
+
+</head>
+
+<body>
+
+<div class="panel panel-primary">
+<div class="panel-heading" align="center"> <font size="+2">车险自助报案 </font></div>
+</div>
+
+<div>
+
+<div class="container">
+<div class="row">
+<label for="area">承保地:</label>
+<select name="province" id="province" style="width:60pt;margin-left:27px">
+<option value="">选择省</option> 
+<option value="上海" code="02">上海市</option>
+<option value="浙江" code="05">浙江省</option>
+</select>
+<select name="city" id="city" style="width:60pt">
+<option value="">选择市</option>
+</select>
+</div>
+</div>
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="telephone">报案电话:</label>
+<input id="telphone" name="telphone" style=" margin-left:12px">
+</div>
+</div>
+
+<div style=" padding-top:5px">
+<label for="file" >上传事故书</label>
+<p>若您已报警处理，可以拍摄事故书照片进行上传报案</p>
+<input type="file" name="file" id="file" accept="image/*"> 
+</div> 
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="ckeck">没有事故书</label> 
+<input type="checkbox" onChange="show();" id="checkbox">
+</div> 
+</div>
+
+</div>
+
+<div id="papers" style="display: none" onMouseout="hidden();">
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="thecar" >出险车牌：</label>
+<input id="thecar" name="thecar" style=" margin-left:20px" placeholder="请填写出险时的车牌或发动机号">
+</div> 
+</div>
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="theperson" >出险驾驶员：</label>
+<input id="theperson" name="theperson" style=" margin-left:6px"></p>
+</div> 
+</div>
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="thetime" >出险时间：</label>
+<input id="thetime" name="thetime" style=" margin-left:20px" readonly>
+</div> 
+</div>
+
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="thelocation" >车辆目前位置</label>
+<input id="thelocation" name="thelocation" placeholder="（市+区+路名）或（道路1+道路2交叉）" size="31">
+</div> 
+</div>
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<button>GPS定位</button>
+<span style="margin-left:18px">若无法实现GPS定位功能，请手动输入</span>
+</div> 
+</div>
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="theplace" >车辆出险位置</label>
+<input id="theplace" name="theplace" placeholder="（市+区+路名）或（道路1+道路2交叉）" size="31">
+</div> 
+</div>
+
+</div>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-primary" style="width:100%" onclick="checkForm()" > <font size="+1">提交</font></button>
+</div>
+<script>
+
+function show(){
+        if(document.getElementById("papers").style.display=="none"){
+                document.getElementById("papers").style.display="";
+        }else{
+                document.getElementById("papers").style.display="none";
+        }
+
+
+}
+</script>
+</body>
+</html>
+

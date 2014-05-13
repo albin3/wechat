@@ -24,7 +24,7 @@ var default_config = {
   PORT: 3000,
   DB_URI: null,
 
-  MODULES: [ 'account', 'wechat' ],
+  MODULES: [ 'account', 'wechat', 'socketio' ],
   STATIC_ROUTER: '/static',
   ROOT_DIR: root_dir,
   MODULE_DIR: path.join(root_dir, 'modules'),
@@ -65,7 +65,7 @@ function Config(extend) {
  * @final
  */
 exports.development = new Config({
-  APP_NAME: 'node-skeleton',
+  APP_NAME: 'node-wechat',
   DEBUG: true,
   PORT: 80,
   DB_URI: 'mongodb://localhost/wechat'
@@ -79,10 +79,10 @@ exports.development = new Config({
  * @final
  */
 exports.testing = new Config({
-  APP_NAME: 'node-skeleton',
+  APP_NAME: 'node-wechat',
   DEBUG: true,
   PORT: 3001,
-  DB_URI: 'mongodb://localhost/skeleton_test'
+  DB_URI: 'mongodb://localhost/wechat_test'
 });
 
 /**
@@ -93,7 +93,7 @@ exports.testing = new Config({
  * @final
  */
 exports.production = new Config({
-  APP_NAME: 'node-skeleton',
+  APP_NAME: 'node-wechat',
   DEBUG: false,
   PORT: 80,
   DB_URI: 'mongodb://localhost/wechat'
@@ -103,8 +103,8 @@ exports.dbinfo = {
   dburl: "localhost:27017",
   dbhost: "localhost",
   dbport: "27017",
-  dbname: "glass",
-  dbpath: "mongodb://localhost:27017/glass?w=1",
-  dbmongoose: "mongodb://localhost/glass"
+  dbname: "wechat",
+  dbpath: "mongodb://localhost:27017/wechat?w=1",
+  dbmongoose: "mongodb://localhost/wechat"
 };
 

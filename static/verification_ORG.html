@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>用户验证</title>
+
+<style type="text/css">
+@import url("./plugins/bootstrap/css/bootstrap.css");
+</style>
+
+        <SCRIPT LANGUAGE="JavaScript">
+function createCode()
+{
+        var seed = new Array(
+                        'abcdefghijklmnopqrstuvwxyz',
+                        'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                        '0123456789'
+                        );               //创建需要的数据数组
+        var idx,i;
+        var result = '';   //返回的结果变量
+        for (i=0; i<4; i++) //根据指定的长度
+        {
+                idx = Math.floor(Math.random()*3); //获得随机数据的整数部分-获取一个随机整数
+                result += seed[idx].substr(Math.floor(Math.random()*(seed[idx].length)), 1);//根据随机数获取数据中一个值
+        }
+        return result; //返回随机结果
+}
+
+</SCRIPT>
+
+<script type="text/javascript">
+window.onload()=autoRandom.innerHTML=createCode(4);
+</script>
+
+</head>
+
+<body onLoad="autoRandom.innerHTML=createCode()">
+
+<div class="panel panel-primary">
+<div class="panel-heading" align="center">
+<font size="+2">用户验证 </font>
+</div>
+</div>
+
+<div class="panel panel-primary" align="center" style="width:200px; border-width:medium;margin:auto;" >
+<font color="#0099FF" size="+2">机构服务</font>
+</div>
+
+<div class="modal-body">
+
+<div class="container">
+<div class="row">
+<label for="telephone" >手机号：</label>
+<input id="telephone" name="telephone" class="col-lg-2" style=" margin-left:27px">
+</div>
+<span id="phonespan"></span>
+</div>
+
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<label for="organization" >分公司代码：</label>
+<input id="organization" name="torganization" class="col-lg-2" >
+</div>
+<span id="orgspan"></span>
+</div>
+
+
+<div class="container" style=" padding-top:5px">
+<div class="row">
+<INPUT TYPE="button" VALUE="验证码" ONCLICK="autoRandom.innerHTML=createCode()">
+<input id="inputRandom" name="inputRandom"  style="width:80px;margin-left:27px" >
+<label id="autoRandom" value="" style="background:#CCC"></label>
+</div>
+<span id="Radspan"></span>
+</div>
+
+<div class="container" style=" padding-top:20px">
+<div class="row">
+<p>温馨提示：</p>
+<p>分公司代码，指的是您所属机构的系统代码</p>
+</div>
+</div>
+
+</div>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-primary" style="width:100%" onclick="checkForm()" > <font size="+1">确 定</font></button>
+</div>
+
+
+<script type="text/javascript">
+
+function phoneTest(phone){
+        var pattern=/^0?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/;
+        return pattern.test(phone);
+}
+
+function checkForm(){
+
+        var tel=document.getElementById("telephone");
+        var org=document.getElementById("organization");  
+        var Rad=document.getElementById("inputRandom");
+        var aRd=document.getElementById("autoRandom").innerHTML.toLowerCase();
+
+        var phonesp=document.getElementById("phonespan"); 
+        var orgsp=document.getElementById("orgspan");
+        var Radsp=document.getElementById("Radspan");
+
+        phonesp.innerText="";
+        orgsp.innerText="";
+        Radsp.innerText="";
+
+        var v=true;
+        if(!phoneTest(tel.value)){
+                phonesp.style.color='red';
+                phonesp.innerText='手机号码必须正确填写';
+                if(v){
+                        tel.focus();
+                }
+                v=false;
+        }  
+
+        if(org.value==""){
+                orgsp.style.color='red';
+                orgsp.innerText='分公司代码必须填写';
+                if(v){
+                        org.focus();
+                }
+                v=false;
+        } 
+
+        if(Rad.value.toLowerCase() != aRd){
+                Radsp.style.color='red';
+                Radsp.innerText= '必须正确填写验证码';
+                if(v){
+                        Rad.focus();
+                }
+                v=false;
+        } 
+
+
+        return v;
+}
+
+</script>
+</body>
+</html>
+

@@ -10,6 +10,14 @@ var express = require('express'),
     logger = require('./extensions').logger,
     wechat = require('wechat');
 
+//使用Socket.IO
+/*
+var fs = require('fs')
+    , http = require('http')
+    , socketio = require('socket.io');
+*/
+
+
 /**
  * 创建应用实例
  *
