@@ -95,7 +95,7 @@ exports.testing = new Config({
 exports.production = new Config({
   APP_NAME: 'node-wechat',
   DEBUG: false,
-  PORT: 80,
+  PORT: 3000,
   DB_URI: 'mongodb://localhost/wechat'
 });
 

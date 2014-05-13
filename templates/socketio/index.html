@@ -5,6 +5,10 @@
   <h2>消息显示如下:</h2>
 </div>
 <script>
+  var socket = io.connect();
+  socket.on('test event', function(data){
+    console.log(data.number);
+  });
   $().ready(function() {
   });
 </script>
