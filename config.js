@@ -21,7 +21,7 @@ var default_config = {
   SECRET_KEY: 'My Secret Key',
   DEBUG: false,
   TESTING: false,
-  PORT: 3000,
+  PORT: 3009,
   DB_URI: null,
 
   MODULES: [ 'account', 'wechat' ],
@@ -67,7 +67,7 @@ function Config(extend) {
 exports.development = new Config({
   APP_NAME: 'node-skeleton',
   DEBUG: true,
-  PORT: 80,
+  PORT: 3009,
   DB_URI: 'mongodb://localhost/wechat'
 });
 
@@ -81,7 +81,7 @@ exports.development = new Config({
 exports.testing = new Config({
   APP_NAME: 'node-skeleton',
   DEBUG: true,
-  PORT: 3001,
+  PORT: 3009,
   DB_URI: 'mongodb://localhost/skeleton_test'
 });
 
@@ -95,7 +95,7 @@ exports.testing = new Config({
 exports.production = new Config({
   APP_NAME: 'node-skeleton',
   DEBUG: false,
-  PORT: 80,
+  PORT: 3009,
   DB_URI: 'mongodb://localhost/wechat'
 });
 
@@ -103,8 +103,8 @@ exports.dbinfo = {
   dburl: "localhost:27017",
   dbhost: "localhost",
   dbport: "27017",
-  dbname: "glass",
-  dbpath: "mongodb://localhost:27017/glass?w=1",
-  dbmongoose: "mongodb://localhost/glass"
+  dbname: "wechat",
+  dbpath: "mongodb://localhost:27017/wechat?w=1",
+  dbmongoose: "mongodb://localhost/wechat"
 };
 

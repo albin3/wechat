@@ -10,6 +10,6 @@ var port = app.PORT || 3000;
 app.listen(port, function() {
   console.info('Application running on port %d.'.green, port);
   console.info('You can now visit '.green +
-               'http://localhost:3001/'.underline.blue +
-               ' via your browser.'.green);
+               'http://localhost:/%d'.underline.blue +
+               ' via your browser.'.green, port);
 });
