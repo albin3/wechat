@@ -2,20 +2,20 @@ var API = require('wechat').API;
 var api = new API('wx601b569d5c050bb3','7b91bbd950aa3910b96b4bddee3118c3');
 
 var menu = {
-  {
+  
    "button":[
      {
         "name":"报案服务",
         "sub_button":[
+           {
+            "type":"click",
+            "name":"索赔须知",
+            "key":"V1001_SuoPei"
+          },       
           {
             "type":"click",
-            "name":"微报案",
-            "key":"V1001_BaoAn"
-          },
-          {
-            "type":"click",
-            "name":"案件查询",
-            "key":"V1002_AnJian"
+            "name":"VIP专享",
+            "key":"V1002_VIP"
           },
           {
             "type":"click",
@@ -24,14 +24,14 @@ var menu = {
           },
           {
             "type":"click",
-            "name":"VIP专享",
-            "key":"V1004_VIP"
+            "name":"案件查询",
+            "key":"V1004_AnJian"
           },
           {
             "type":"click",
-            "name":"索赔须知",
-            "key":"V1005_SuoPei"
-          }         
+            "name":"微报案",
+            "key":"V1005_BaoAn"
+          }
         ]
      },
      {
@@ -39,8 +39,8 @@ var menu = {
         "sub_button":[
           {
             "type":"click",
-            "name":"案件改派",
-            "key":"V2001_GaiPai"
+            "name":"投保初审",
+            "key":"V2001_ChuShen"
           },
           {
             "type":"click",
@@ -49,9 +49,9 @@ var menu = {
           },
           {
             "type":"click",
-            "name":"投保初审",
-            "key":"V2003_ChuShen"
-          }         
+            "name":"案件改派",
+            "key":"V2003_GaiPai"
+          }
         ]
      },
      {
@@ -59,30 +59,27 @@ var menu = {
         "sub_button":[
           {
             "type":"click",
-            "name":"酒后代驾",
-            "key":"V3001_DaiJia"
+            "name":"预约收单",
+            "key":"V3001_ShouDan"
           },
           {
             "type":"click",
             "name":"道路救援",
             "key":"V3002_JiuYuan"
           },
-
           {
             "type":"click",
-            "name":"预约收单",
-            "key":"V3003_ShouDan"
-          }         
+            "name":"酒后代驾",
+            "key":"V3003_DaiJia"
+          }
         ]
      }     
     ]
   }
-}
 
-api.createMenu(menu,function(ret){
-  if (err) {
-    return res.end(JSON.stringify({ret: 2000}));
-    }
-  return res.end(JSON.stringify({ret: 1000}));
+
+api.createMenu(menu,function(err,result){
+  console.log(err);
+  console.log(result);
 });
 

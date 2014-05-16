@@ -21,6 +21,7 @@
     "wechat": ">=0.6.7",
     "mongojs": "*",
     "redis": "*",
+    "socket.io": "1.0.0-pre2",
     "underscore": "~1.6.0"
   },
   "devDependencies": {

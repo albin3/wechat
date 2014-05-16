@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>用户验证</title>
+<link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.min.css">
+<script src="/static/js/lib/jquery-1.10.2.min.js"></script>
+<script src="/static/js/lib/knockout-3.0.0.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>用户验证</title>
+
+<style type="text/css">
+@import url("../Workspace/git/wechat/static/plugins/bootstrap/css/bootstrap.css");
+@import url("../Workspace/git/wechat/static/plugins/bootstrap/css/bootstrap-theme.css");
+@import url("../Workspace/git/wechat/static/css/wechat/singup.css");
+</style>
+
+        <SCRIPT LANGUAGE="JavaScript">
+function createCode(len)
+{
+        var seed = new Array(
+                        'abcdefghijklmnopqrstuvwxyz',
+                        'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                        '0123456789'
+                        );               //创建需要的数据数组
+        var idx,i;
+        var result = '';   //返回的结果变量
+        for (i=0; i<len; i++) //根据指定的长度
+        {
+                idx = Math.floor(Math.random()*3); //获得随机数据的整数部分-获取一个随机整数
+                result += seed[idx].substr(Math.floor(Math.random()*(seed[idx].length)), 1);//根据随机数获取数据中一个值
+        }
+        return result; //返回随机结果
+}
+
+function phoneTest(phone){
+        var pattern=/^0?(13[0-9]|15[012356789]|18[0-9]|14[57])[0-9]{8}$/;
+        return pattern.test(phone);
+}
+
+</SCRIPT>
+
+</head>
+
+<body>
+
+<div class="panel panel-primary">
+<div class="panel-heading" align="center"> <font size="+2">用户验证 </font></div>
+</div>
+
+<div class="panel panel-primary" align="center" style="width:200px; border-width:medium;margin:0 auto;" ><font color="#0099FF" size="+2">机构服务</font></div>
+
+<div class="modal-body">
+<form class="form-horizontal" role="form">
+
+<div class="form-group">
+<label for="telephone" class="col-sm-2 control-label">手机号：</label>
+<div class="col-sm-4">
+<input id="telphone" name="telphone" class="form-control">
+<span class="col-sm-4" id="tel_sp"></span>
+</div>
+</div>
+
+<div class="form-group">
+<label for="organization" class="col-sm-2 control-label">分公司代码</label>
+<div class="col-sm-4">
+<input id="organization" name="torganization" class="form-control">
+<span class="col-sm-4" id="org_sp"></span>
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label for="inputRandom" class="col-sm-2 control-label">验证码：</label>
+<div class="col-sm-2">
+<input id="inputRandom" name="inputRandom" class="form-control">
+<span class="col-sm-2" id="Rad_sp"></span>
+</div>
+<div class="col-sm-6">
+<label id="autoRandom" value=""></label><INPUT TYPE="button" VALUE="获取验证码" ONCLICK="autoRandom.innerHTML=createCode(4)">
+</div>
+</div>
+
+<div align="justify">
+<p>温馨提示：</p>
+<p>分公司代码，指的是您所属机构的系统代码</p>
+</div>
+
+</form>
+</div>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-primary" style="width:100%" onclick="checkForm()" > <font size="+1">确   定</font></button>
+</div>
+
+<script type="text/javascript">
+window.onload()=autoRandom.innerHTML=createCode(4);
+</script>
+</body>
+</html>
