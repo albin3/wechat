@@ -15,6 +15,36 @@ exports.initsocket = function(socket) {
   var numUsers  = 0;
   var addedUser = false;
 
+  socket.on('room', function(room) {
+    socket.username = 'admin';
+    socket.roomname = room
+    socket.emit('open');
+    socket.join(room);
+    console.log(socket.username);
+    console.log(socket.roomname);
+    }); 
+  socket.on('message', function(msg){
+    var obj = {time:getTime(),color:getColor()};
+    obj['text']=msg;
+    obj['author']=socket.username;
+    obj['type']='message';
+    console.log(socket.username + ' say: ' + msg + ' to ' + socket.roomname);
+    // 返回消息（可以省略）
+    socket.emit('message',obj);
+    api.sendText(socket.roomname,msg, function(err,result){
+    });
+    });
+
+  socket.on('mymessage', function(data){
+     var obj = {time:getTime(),color:getColor()};
+     obj['text']=data.msg;
+     obj['author']=data.username;
+     obj['type']='message';
+     console.log(data.username + ' say: ' +data.msg + ' to ' + data.roomname);
+     socket.emit('message',obj);
+     socket.bbroadcast.emit('message',obj);
+    });
+
   //socket.on是监听，收到服务器端发来的new message的内容，则运行function，其中data就是请求回来的数据
   socket.on('new message', function (data) {
     // socket.emit是发送消息给服务器端的方法。
@@ -23,9 +53,9 @@ exports.initsocket = function(socket) {
       roomname:socket.roomname,
       message: data
     });
-    console.log(socket.roomname);
-    api.sendText('oDaPijoHCe-q_UOtxORE4GCpNHOo',data , function(err,result){
-    });
+    console.log(data);
+    console.log(socket);
+
   });
 
   // when the client emits 'add user', this listens and executes
@@ -41,6 +71,7 @@ exports.initsocket = function(socket) {
     socket.emit('login', {
       numUsers: numUsers
     });
+    socket.join(socket.roomname);
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
       username: socket.username,
@@ -76,5 +107,15 @@ exports.initsocket = function(socket) {
       });
     }
   });
+  var getTime=function(){
+    var date = new Date();
+      return date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+      }
+
+      var getColor=function(){
+        var colors = ['aliceblue','antiquewhite','aqua','aquamarine','pink','red','green',
+                        'orange','blue','blueviolet','brown','burlywood','cadetblue'];
+                          return colors[Math.round(Math.random() * 10000 % colors.length)];
+                          }
 }
 

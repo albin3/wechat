@@ -1,0 +1,27 @@
+<header class="navbar navbar-inverse" role="banner">
+<div class="container">
+<div class="navbar-header">
+<a href="/admin" class="navbar-brand">太平洋产险上海运营中心</a>
+</div>
+
+<nav class="collapse navbar-collapse" role="navigation">
+<ul id="mainnav" class="nav navbar-nav">
+<li id="nav-account"><a href="/admin/userctrl">账号管理</a></li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ current_user.name }}<b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li><a href="/u/signout">登出</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+<script>
+var page = "{{ nav_page }}";
+$("#mainnav #nav-" + page).addClass("active");
+</script>
+</div>
+</header>

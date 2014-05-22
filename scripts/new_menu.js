@@ -51,7 +51,13 @@ var menu = {
                         "type":"click",
                         "name":"投保初审",
                         "key":"V2003_ChuShen"
+                },
+                {
+                        "type":"click",
+                        "name":"道路救援",
+                        "key":"V2004_JiuYuan"
                 }
+
                 ]
         },
         {
@@ -64,13 +70,8 @@ var menu = {
                 },
                 {
                         "type":"click",
-                        "name":"道路救援",
-                        "key":"V3002_JiuYuan"
-                },
-                {
-                        "type":"click",
                         "name":"预约收单",
-                        "key":"V3003_ShouDan"
+                        "key":"V3002_ShouDan"
                 }
                 ]
         }

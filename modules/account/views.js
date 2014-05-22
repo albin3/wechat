@@ -14,22 +14,6 @@ exports.signin = function(req, res) {
   });
 };
 
-exports.signup = function(req, res) {
-  if (req.method === 'GET') return res.render('account/signup');
-
-  if (!req.form.isValid)
-    return res.render('account/signup', { errors: req.form.getErrors() });
-
-  var user = new User(req.form);
-  user.save(function(err) {
-    if (err) throw new Error();
-    else {
-      req.flash('Successfully signed up.');
-      res.redirect('/u/signin');
-    }
-  });
-};
-
 exports.signout = function(req, res) {
   req.logout_user();
   res.redirect('/u/signin');

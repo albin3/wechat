@@ -5,9 +5,10 @@ var model = require('./model'),
 // 微信路由
 exports.wechat = wechat('qweruiop',wechat.text(function (message, req, res) {
 model.autoreply_txt(message, req,  res);
-}).location(function (message, req, res)
-{
-
+}).location(function (message, req, res){
+model.autoreply_loc(message, req,  res);
+}).image(function (message, req, res){
+model.autoreply_pic(message, req,  res);
 }).event(function (message, req, res) {
   console.log(message);
 
@@ -24,12 +25,13 @@ var con_SuoPei = '请回复您所需查询事项的序号： \n' +
                    ' 5.涉及支付、垫付事故 \n' +
                    ' 6.盗抢事故 '
 var con_idf = '您尚未绑定手机号！\n '
-var con_VIP = ' <a href="http://183.61.111.195/static/verification_VIP.html">>请点击此处绑定手机号！</a> '
+var con_VIP = ' <a href="http://183.61.111.195/static/verification_VIP.html">请点击此处绑定手机号！</a> '
 var con_LiPei = '请回复查询项目的序号：\n' +
                    ' 1.出险次数 \n' +
                    ' 2.赔付金额 \n' +
                    ' 3.理赔状态'
-var con_AnJian = '请回复查询条件的序号： \n' +
+var con_AnJian = '本功能仅适用于通过微信报案的案件信息。 \n' +
+                   '请回复查询条件的序号： \n' +
                    ' 1.车牌号 \n ' +
                    ' 2.保单号 \n ' +
                    ' 3.报案号'
@@ -41,9 +43,10 @@ var con_BaoAn = '请点选报案类型：\n\t\n' +
                    '<a href="http://183.61.111.195/static/Report.html">非车险报案</a>' +
                    '\n\r'
 var con_JiGou = ' <a href="http://183.61.111.195/static/verification_ORG.html">请点击此处绑定手机号！</a> '
-var con_JiuYuan = '请输入任务派遣工短信的全部内容，谢谢！'
+var con_JiuYuan = '请输入任务派工短信的全部内容，谢谢！'
 var con_dev = '即将开放'
 var con_err = '系统错误，请重试！'
+model.autoreply_menu(message, req, res);
   // 用户使用菜单时的消息
     switch(message.EventKey){
 
@@ -79,15 +82,15 @@ var con_err = '系统错误，请重试！'
       return  res.reply(con_idf + con_JiGou);
       break;
 
+      case 'V2004_JiuYuan':
+      return  res.reply(con_idf + con_JiGou);
+      break;
+
       case 'V3001_DaiJia':
       return  res.reply(con_dev);
       break;
 
-      case 'V3002_JiuYuan':
-      return  res.reply(con_JiuYuan);
-      break;
-
-      case 'V3003_ShouDan':
+      case 'V3002_ShouDan':
       return  res.reply(con_dev);
       break;
 

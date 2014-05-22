@@ -1,0 +1,57 @@
+{% extends "../base.html" %}
+{% block extra_css %}
+  {% endblock %}
+  {% block content %}
+<div class="jumbotron" style="height:440px;width:700px;background:#0CF; padding-top:5px; padding-left:5px; padding-right:5px; padding-bottom:0px">
+
+
+<div style="height:430px; width:185px;background:#cccccc; float:right">
+
+</div>
+
+<div style="height:320px; width:502px;background:#f4f4f4">
+<ul id="textoshow" style="margin:0;padding:0; list-style:none"></ul>
+</div>
+
+<div style="height:106px; width:502px; margin-top:5px;background:#f4f4f4 ">
+<textarea id="textoenter" cols="80" rows="5" style=" resize:none"></textarea>
+</div>
+
+
+</div>
+
+<script>
+$(function () {
+                var textoshow = $('#textoshow');
+                var textoenter = $('#textoenter');
+                textoenter.val('');
+                //建立websocket连接
+                var socket = io();
+                //收到server的连接确认
+                socket.on('open',function(){
+                        textoshow.append('Welcom!');
+                        });
+                socket.on('connect', function() {
+                        socket.emit('room', 'oDaPijoHCe-q_UOtxORE4GCpNHOo');
+                        });
+
+                //监听message事件，打印消息信息
+                socket.on('message',function(json){
+                    console.log(json);
+                    var p = '<p><span style="color:'+json.color+';">' + json.author+'</span> @ '+ json.time+ ' : '+json.text+'</p>';
+                    textoshow.append(p) ;
+                        });
+
+                //通过“回车”提交聊天信息
+                textoenter.keydown(function(e) {
+                                if (e.keyCode === 13) {
+                                var msg = $(this).val();
+                                if (!msg) return;
+                                console.log(msg);
+                                socket.send(msg);
+                                $(this).val('');
+
+                                }
+                                });
+});
+</script>

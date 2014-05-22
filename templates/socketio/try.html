@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Try</title>
+<script src="/socket.io/socket.io.js"></script>
+<SCRIPT LANGUAGE="javascript"> 
+var socket = io();
+socket.on('open',function(){
+socket.emit('add user', username);
+});
+
+function openwin() { 
+window.open ('/chatting', 'newwindow', 'height=470px, width=720px, top=0,left=0, toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no,status=no') 
+}
+</SCRIPT> 
+</head>
+
+<body>
+<button onClick="openwin()">Try!</button>
+</body>
+</html>
